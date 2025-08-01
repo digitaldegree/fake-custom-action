@@ -5,8 +5,8 @@ echo "Triggered by: $GITHUB_ACTOR"
 
 if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
   echo "Checking commit: $GITHUB_SHA"
-  FILES=$(jq -r '[.commits[].added // [], .commits[].modified // [], .commits[].removed // []] | flatten | unique[]' "$GITHUB_EVENT_PATH")
-  echo "📄 Files changed in commit: $FILES"
+  echo "EVENT JSON:"
+  jq "$GITHUB_EVENT_PATH"
 else
-  echo "⏭️ Event '$GITHUB_EVENT_NAME' is not a push. Skipping file count."
+  echo "Event '$GITHUB_EVENT_NAME' is not a push. Skipping file count."
 fi
