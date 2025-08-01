@@ -1,12 +1,15 @@
 #!/bin/bash
 set -e
 
-echo "Triggered by: $GITHUB_ACTOR"
+echo "👤 Actor       : $GITHUB_ACTOR"
+echo "#️⃣ Commit SHA  : $GITHUB_SHA"
+echo "▶️ Event type  : $GITHUB_EVENT_NAME"
 
-if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-  echo "Checking commit: $GITHUB_SHA"
-  echo "EVENT JSON:"
-  jq . "$GITHUB_EVENT_PATH"
+VISIBILITY=$(jq -r '.repository.visibility' "$GITHUB_EVENT_PATH")
+
+
+if [[ "$VISIBILITY" == "private" ]]; then
+  echo "🥽 Visibility: 🔒 This is a PRIVATE repository."
 else
-  echo "Event '$GITHUB_EVENT_NAME' is not a push. Skipping file count."
+  echo "🥽 Visibility: 🌍 This is a PUBLIC repository."
 fi
