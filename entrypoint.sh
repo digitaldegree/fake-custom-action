@@ -4,7 +4,7 @@ set -e
 echo "👤 Actor       : $GITHUB_ACTOR"
 echo "🆔 Commit SHA  : $GITHUB_SHA"
 echo "▶️ Event type  : $GITHUB_EVENT_NAME"
-echo -n "🥽 Visibility  : "
+echo -n "🔎 Visibility  : "
 
 VISIBILITY=$(jq -r '.repository.visibility' "$GITHUB_EVENT_PATH")
 
